@@ -1658,3 +1658,7 @@ canvas.addEventListener("pointerdown", function () {
 
 criarInimigo(450, 200);
 atualizarJogo()
+
+document.getElementById("btn-pular").addEventListener("pointerdown", function () {
+    alert("O botão PULAR recebeu o toque!");
+});
