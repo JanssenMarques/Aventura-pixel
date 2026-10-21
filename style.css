@@ -1,12 +1,169 @@
-body {
-    background-color: #202030;
-    color: white;
-    text-align: center;
-    font-family: Arial, sans-serif;
+
+/* =====================================
+   CONFIGURAÇÕES GERAIS
+===================================== */
+
+* {
+    box-sizing: border-box;
 }
 
+body {
+    margin: 0;
+    padding: 10px;
+    background-color: #202030;
+    color: white;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    overflow-x: hidden;
+}
+
+h1 {
+    margin: 5px 0 10px;
+    font-size: 24px;
+}
+
+/* =====================================
+   TELA DO JOGO
+===================================== */
+
 canvas {
+    display: block;
+    width: 100%;
+    max-width: 800px;
+    height: auto;
+    max-height: 65vh;
+    object-fit: contain;
+    margin: 0 auto;
     background-color: #87CEEB;
     border: 3px solid white;
 }
 
+/* =====================================
+   ÁREA PRINCIPAL DOS CONTROLES
+===================================== */
+
+#controles-mobile {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    width: 100%;
+    max-width: 800px;
+    margin: 12px auto;
+    padding: 0 5px;
+    gap: 15px;
+}
+
+/* =====================================
+   DIRECIONAIS - LADO ESQUERDO
+===================================== */
+
+#direcionais {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+#btn-esquerda,
+#btn-direita {
+    width: 70px;
+    height: 60px;
+    font-size: 26px;
+}
+
+/* =====================================
+   AÇÕES - LADO DIREITO
+===================================== */
+
+#acoes {
+    display: grid;
+    grid-template-columns: repeat(2, 55px);
+    grid-template-rows: repeat(2, 45px);
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+#btn-correr,
+#btn-agachar,
+#btn-pular,
+#btn-atirar {
+    width: 55px;
+    height: 45px;
+    font-size: 11px;
+}
+
+/* =====================================
+   APARÊNCIA DOS BOTÕES
+===================================== */
+
+#controles-mobile button {
+    background-color: #333333;
+    color: white;
+    border: 2px solid white;
+    border-radius: 10px;
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+
+    cursor: pointer;
+    touch-action: none;
+    user-select: none;
+    -webkit-user-select: none;
+
+    padding: 0;
+}
+
+#controles-mobile button:active {
+    background-color: #666666;
+    transform: scale(0.95);
+}
+
+/* =====================================
+   TELAS PEQUENAS
+===================================== */
+
+@media (max-width: 600px) {
+
+    body {
+        padding: 5px;
+    }
+
+    h1 {
+        font-size: 18px;
+        margin: 4px 0 8px;
+    }
+
+    #controles-mobile {
+        gap: 8px;
+        padding: 0 3px;
+    }
+
+    #direcionais {
+        gap: 5px;
+    }
+
+    #btn-esquerda,
+    #btn-direita {
+        width: 55px;
+        height: 55px;
+        font-size: 22px;
+    }
+
+    #acoes {
+        grid-template-columns: repeat(2, 48px);
+        grid-template-rows: repeat(2, 42px);
+        gap: 5px;
+    }
+
+    #btn-correr,
+    #btn-agachar,
+    #btn-pular,
+    #btn-atirar {
+        width: 48px;
+        height: 42px;
+        font-size: 10px;
+    }
+}

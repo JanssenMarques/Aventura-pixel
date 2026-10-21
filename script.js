@@ -73,9 +73,9 @@ let jogoIniciado = false;
 
 const jogador = {
     x: 100,
-    y: 300,
+    y: 305,
     largura: 30,
-    altura: 50,
+    altura: 45,
     cor: "red",
     velocidadeY: 0,
     noChao: true,
@@ -587,7 +587,9 @@ function atualizarVelocidadeBoss() {
 
 function movimentarBoss() {
     if (performance.now() < boss.presoAte) {
-        return;
+        boss.velocidade = 0.3;
+    } else {
+        boss.velocidade = 1.5;
     }
     const objetos = [...plataformas, ...obstaculos];
 
@@ -830,38 +832,46 @@ function atualizarFisicaBoss() {
 
 
 const plataformas = [
-    { x: 90, y: 170, largura: 85, altura: 15, cor: "brown" },
-    { x: 210, y: 290, largura: 65, altura: 18, cor: "brown" },
-    { x: 320, y: 250, largura: 120, altura: 20, cor: "brown" },
-    { x: 445, y: 130, largura: 75, altura: 16, cor: "brown" },
-    { x: 620, y: 155, largura: 90, altura: 16, cor: "brown" },
-    { x: 730, y: 230, largura: 110, altura: 18, cor: "brown" },
-    { x: 850, y: 300, largura: 65, altura: 15, cor: "brown" },
-    { x: 900, y: 185, largura: 130, altura: 20, cor: "brown" },
-    { x: 1035, y: 260, largura: 80, altura: 16, cor: "brown" },
-    { x: 1090, y: 120, largura: 95, altura: 18, cor: "brown" },
-    { x: 1190, y: 215, largura: 150, altura: 20, cor: "brown" },
-    { x: 1270, y: 305, largura: 20, altura: 45, cor: "brown" },
-    { x: 1380, y: 165, largura: 90, altura: 16, cor: "brown" },
-    { x: 1470, y: 255, largura: 125, altura: 20, cor: "brown" },
-    { x: 1550, y: 105, largura: 80, altura: 16, cor: "brown" },
-    { x: 1650, y: 200, largura: 130, altura: 18, cor: "brown" },
-    { x: 1775, y: 250, largura: 15, altura: 50, cor: "brown" },
-    { x: 1810, y: 145, largura: 100, altura: 20, cor: "brown" },
-    { x: 1900, y: 245, largura: 115, altura: 18, cor: "brown" },
-    { x: 1980, y: 305, largura: 65, altura: 15, cor: "brown" },
-    { x: 2050, y: 185, largura: 130, altura: 20, cor: "brown" },
-    { x: 2130, y: 275, largura: 16, altura: 75, cor: "brown" },
-    { x: 2240, y: 130, largura: 85, altura: 18, cor: "brown" },
-    { x: 2290, y: 225, largura: 80, altura: 16, cor: "brown" }
+    // Início: saltos acessíveis
+    { x: 0, y: 225, largura: 120, altura: 15, cor: "brown" },//0
+    { x: 190, y: 290, largura: 120, altura: 15, cor: "brown" },//1
+    { x: 190, y: 140, largura: 120, altura: 15, cor: "brown" },//1
+    { x: 410, y: 225, largura: 120, altura: 15, cor: "brown" },//2
+    { x: 640, y: 290, largura: 130, altura: 15, cor: "brown" },//3
+    { x: 640, y: 130, largura: 130, altura: 15, cor: "brown" },//3
+
+    // Região intermediária: maior variação de altura
+    { x: 880, y: 210, largura: 130, altura: 15, cor: "brown" },//4
+    { x: 1110, y: 285, largura: 140, altura: 15, cor: "brown" },//5
+    { x: 1110, y: 135, largura: 140, altura: 15, cor: "brown" },//5
+    { x: 1350, y: 195, largura: 130, altura: 15, cor: "brown" },//6
+
+    // Região avançada
+    { x: 1580, y: 280, largura: 140, altura: 15, cor: "brown" },//7
+    { x: 1580, y: 130, largura: 140, altura: 15, cor: "brown" },//7
+    { x: 1810, y: 205, largura: 130, altura: 15, cor: "brown" },//8
+
+    // Final
+    { x: 2040, y: 285, largura: 140, altura: 15, cor: "brown" },//9
+    { x: 2040, y: 135, largura: 140, altura: 15, cor: "brown" },//9
+    { x: 2260, y: 220, largura: 120, altura: 15, cor: "brown" }//10
 ];
 
 const obstaculos = [
-    { x: 540, y: 295, largura: 100, altura: 25, cor: "darkgreen" },
-    { x: 950, y: 290, largura: 50, altura: 30, cor: "darkgreen" },
-    { x: 1350, y: 285, largura: 85, altura: 35, cor: "darkgreen" },
-    { x: 1820, y: 295, largura: 50, altura: 25, cor: "darkgreen" },
-    { x: 2180, y: 290, largura: 75, altura: 30, cor: "darkgreen" }
+    // Início: barreiras baixas
+    { x: 430, y: 330, largura: 25, altura: 20, cor: "darkgreen" },
+    
+
+    // Região intermediária
+    { x: 950, y: 320, largura: 35, altura: 30, cor: "darkgreen" },
+    { x: 1400, y: 315, largura: 35, altura: 35, cor: "darkgreen" },
+
+    // Região avançada
+    { x: 1850, y: 310, largura: 40, altura: 40, cor: "darkgreen" },
+    
+
+    // Final do cenário
+    { x: 2300, y: 315, largura: 40, altura: 35, cor: "darkgreen" }
 ];
 
 
@@ -967,10 +977,6 @@ function recarregarMunicao() {
 
 function atirar() {
 
-    if (jogador.municao <= 0) {
-        return;
-    }
-
     const direcao = teclas.ultimaDirecao === "esquerda" ? -1 : 1;
 
     projeteisJogador.push({
@@ -990,7 +996,6 @@ function atirar() {
         jogador.ultimaRecarga = performance.now();
     }
 
-    jogador.municao -= 1;
 }
 
 function movimentarProjeteisJogador() {
@@ -1148,7 +1153,7 @@ function desenharJogador() {
     }
 
     const larguraVisual = jogador.agachado ? 30 : 70;
-    const alturaVisual = jogador.agachado ? 40 : 50;
+    const alturaVisual = jogador.agachado ? 35 : 50;
 
     const xVisual = jogador.x -
         (larguraVisual - jogador.largura) / 2;
@@ -1180,20 +1185,22 @@ function desenharJogador() {
 }
 
 function pular() {
+
+    if (performance.now() < jogador.presoAte) {
+        return;
+    }
+
     if (jogador.pulosRestantes > 0) {
         jogador.velocidadeY = -8.5;
         jogador.noChao = false;
         jogador.pulosRestantes -= 1;
-    }
-    if (performance.now() < jogador.presoAte) {
-        return;
     }
 }
 
 function agachar() {
     if (jogador.noChao && !jogador.agachado) {
         jogador.altura = 30;
-        jogador.y += 20;
+        jogador.y += 15;
         jogador.agachado = true;
     }
 }
@@ -1203,7 +1210,7 @@ function levantar() {
         return;
     }
 
-    const novaAltura = 50;
+    const novaAltura = 45;
     const novoY = jogador.y + jogador.altura - novaAltura;
 
     const objetos = [...plataformas, ...obstaculos];
@@ -1395,7 +1402,7 @@ function atualizarJogo() {
     } else {
         distanciaPercorrida = 0;
     }
-    atualizarVelocidadeBoss();
+    //atualizarVelocidadeBoss();
     movimentarBoss();
     verificarGameOver();
     movimentarProjeteisJogador();
@@ -1435,7 +1442,7 @@ function atualizarJogo() {
 
     ctx.restore();
     desenharResistencia();
-    desenharMunicao();
+    //desenharMunicao();
 
     // Elementos fixos na tela
     desenharContador();
@@ -1481,7 +1488,7 @@ document.addEventListener("keydown", function (evento) {
         }
     }
 
-    if (evento.code === "Space" || evento.code === "ArrowUp") {
+    if (evento.code === "ArrowUp") {
         evento.preventDefault();
         teclas.pulo = true;
     }
@@ -1514,7 +1521,7 @@ document.addEventListener("keyup", function (evento) {
         teclas.esquerda = false;
     }
 
-    if (evento.code === "Space" || evento.code === "ArrowUp") {
+    if (evento.code === "ArrowUp") {
         evento.preventDefault();
         teclas.pulo = false;
     }
@@ -1572,5 +1579,82 @@ function movimentarJogador() {
 
 }
 
-criarInimigo(400, 225);
+const botaoEsquerda = document.getElementById("btn-esquerda");
+const botaoDireita = document.getElementById("btn-direita");
+
+function configurarBotaoMovimento(botao, direcao) {
+    botao.addEventListener("pointerdown", function (evento) {
+        evento.preventDefault();
+
+        botao.setPointerCapture(evento.pointerId);
+
+        teclas[direcao] = true;
+        teclas.ultimaDirecao = direcao;
+    });
+
+    function soltarBotao() {
+        teclas[direcao] = false;
+    }
+
+    botao.addEventListener("pointerup", soltarBotao);
+    botao.addEventListener("pointercancel", soltarBotao);
+    botao.addEventListener("lostpointercapture", soltarBotao);
+}
+
+configurarBotaoMovimento(botaoEsquerda, "esquerda");
+configurarBotaoMovimento(botaoDireita, "direita");
+
+
+function configurarBotaoAcao(id, tecla) {
+    const botao = document.getElementById(id);
+
+    botao.addEventListener("pointerdown", function(evento) {
+        evento.preventDefault();
+        botao.setPointerCapture(evento.pointerId);
+
+        teclas[tecla] = true;
+    });
+
+    function soltarBotao() {
+        teclas[tecla] = false;
+    }
+
+    botao.addEventListener("pointerup", soltarBotao);
+    botao.addEventListener("pointercancel", soltarBotao);
+    botao.addEventListener("lostpointercapture", soltarBotao);
+}
+
+configurarBotaoAcao("btn-correr", "correr");
+configurarBotaoAcao("btn-agachar", "baixo");
+configurarBotaoAcao("btn-pular", "pulo");
+
+const botaoAtirar = document.getElementById("btn-atirar");
+
+botaoAtirar.addEventListener("pointerdown", function(evento) {
+    evento.preventDefault();
+    botaoAtirar.setPointerCapture(evento.pointerId);
+
+    if (!teclas.atirar) {
+        teclas.atirar = true;
+        atirar();
+    }
+});
+
+function soltarBotaoAtirar() {
+    teclas.atirar = false;
+}
+
+botaoAtirar.addEventListener("pointerup", soltarBotaoAtirar);
+botaoAtirar.addEventListener("pointercancel", soltarBotaoAtirar);
+botaoAtirar.addEventListener("lostpointercapture", soltarBotaoAtirar);
+
+
+canvas.addEventListener("pointerdown", function () {
+    if (!jogoIniciado) {
+        jogoIniciado = true;
+        inicioPartida = performance.now();
+    }
+});
+
+criarInimigo(450, 200);
 atualizarJogo()
