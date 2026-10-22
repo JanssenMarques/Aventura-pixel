@@ -1330,7 +1330,7 @@ function desenharTelaInicial() {
     const regras = [
         "Setas esquerda e direita: movimentar",
         "Shift: correr",
-        "Seta para cima ou Espaço: pular (até 2 vezes)",
+        "Seta para cima: pular (até 2 vezes)",
         "Seta para baixo: agachar",
         "Ctrl: lançar bolas de energia",
         "Colete itens verdes para recuperar resistência",
